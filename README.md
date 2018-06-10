@@ -5,7 +5,9 @@ This is the firmware code for my personal project to manage my electric water he
 Dependencies
 ---
 OneWire: https://github.com/particle-iot/OneWireLibrary
+
 SparkIntervalTimer: https://github.com/pkourany/SparkIntervalTimer
+
 Spark-RestClient: https://github.com/llad/spark-restclient
 
 
@@ -21,13 +23,15 @@ call
 It can be useful to add something (perhaps a button?) to manually trigger the
  calibration.
 
+**Currently not added: there's no room for this code.**
+
 My Watchdog implementation
 ---
 A timer is calling each 10 seconds a callback. This callback is resetting the Core.
-Inside the main loop function we reset the timer each 2.5 seconds
+Inside the main loop function, we reset the timer each 2.5 seconds so the callback is not called.
 If the Core is stuck for more than 10 seconds, the callback will be called resetting the Core.
 
 Remote Logging
 ---
-Client side (.ino file): I know I can do much better.
-Server side: Seriously need improvements. It's the node.js UDP server sample code
+- Client side (.ino file): I know I can do much better.
+- Server side: Seriously need improvements. It's the node.js UDP server sample code
