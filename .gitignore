@@ -1,0 +1,4 @@
+src/MySmartThermostat.h
+*.bin
+schematics/*
+.DS_Store
