@@ -5,7 +5,9 @@ This is the firmware code for my personal project to manage my electric water he
 Dependencies
 ---
 OneWire: https://github.com/particle-iot/OneWireLibrary
+
 SparkIntervalTimer: https://github.com/pkourany/SparkIntervalTimer
+
 Spark-RestClient: https://github.com/llad/spark-restclient
 
 
