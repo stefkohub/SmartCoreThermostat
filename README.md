@@ -15,21 +15,66 @@ Potentiometer calibration and EEPROM
 ---
 We need a factor to scale the potentiometer readings to 0-100°C.
 A dynamic way to do this can be get PMAX and PMIN values:
-- in setup(): check for already saved PMIN,PMAX data in EEPROM. If not, start
+ - in setup(): check for already saved PMIN,PMAX data in EEPROM. If not, start
 a 5 seconds calibration procedure. This procedure is getting max and min READINGS
-from potentiometer. When finished, save data in EEPROM
-- in normalize_temperature_reading(): use PMIN and PMAX loaded in setup() in a map
-call
+from potentiometer. When finished, save data in EEPROM.
+ - In normalize_temperature_reading(): use PMIN and PMAX loaded in setup() in a map
+call.
+
 It can be useful to add something (perhaps a button?) to manually trigger the
  calibration.
 
 My Watchdog implementation
 ---
-A timer is calling each 10 seconds a callback. This callback is resetting the Core.
-Inside the main loop function we reset the timer each 2.5 seconds
-If the Core is stuck for more than 10 seconds, the callback will be called resetting the Core.
+- A timer is calling each 10 seconds a callback. This callback is resetting the Core.
+- Inside the main loop function we reset the timer each 2.5 seconds.
+- If the Core is stuck for more than 10 seconds, the callback will be called resetting the Core.
 
 Remote Logging
 ---
 Client side (.ino file): I know I can do much better.
 Server side: Seriously need improvements. It's the node.js UDP server sample code
+
+Philips Hue Sensors
+---
+I have created two sensors: 
+ 1. CLIPTemperature sensor to read the water heater temperature
+ 2. CLIPGenericStatus to set it on/off and the temperature setpoint 
+
+```javascript
+"11": {
+		"state": {
+			"temperature": 0,
+			"lastupdated": "none"
+		},
+		"config": {
+			"on": true,
+			"reachable": false
+		},
+		"name": "°C attuali",
+		"type": "CLIPTemperature",
+		"modelid": "SFTEMPSENSOR001",
+		"manufacturername": "StefanoFalsetto",
+		"swversion": "0.1",
+		"uniqueid": "70:FF:76:01:4C:3C:temp",
+		"recycle": false
+	},
+	"12": {
+		"state": {
+			"status": 0,
+			"lastupdated": "none"
+		},
+		"config": {
+			"on": true,
+			"reachable": false
+		},
+		"name": "°C desiderati",
+		"type": "CLIPGenericStatus",
+		"modelid": "SFSENSOR002",
+		"manufacturername": "StefanoFalsetto",
+		"swversion": "0.1",
+		"uniqueid": "70:FF:76:01:4C:3C:setpoint",
+		"recycle": false
+	}
+}
+```
